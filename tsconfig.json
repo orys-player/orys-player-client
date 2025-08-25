@@ -1,7 +1,26 @@
 {
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
-  ]
+    "compilerOptions": {
+        "moduleResolution": "bundler",
+        "module": "ESNext",
+        "target": "ES2020",
+        "lib": ["ES2020", "DOM", "DOM.Iterable"],
+        "types": ["vite/client"],
+        "baseUrl": ".",
+        "composite": true,
+        "allowJs": true,
+        "removeComments": true,
+        "skipLibCheck": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "strict": true,
+        "forceConsistentCasingInFileNames": false,
+        "noFallthroughCasesInSwitch": true,
+        "resolveJsonModule": true,
+        "noImplicitAny": false,
+        "isolatedModules": true,
+        "noEmit": true,
+        "jsx": "preserve"
+    },
+    "include": ["src"],
+    "exclude": ["node_modules", "dist"]
 }
