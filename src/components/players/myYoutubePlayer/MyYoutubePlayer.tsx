@@ -6,20 +6,17 @@ export function MyYoutubePlayer() {
 
     React.useEffect(() => {
         const player = YoutubePlayer(playerRef.current!, {
-            videoId: 'M7lc1UVf-VE',
+            videoId: 'ucnzN5byPdE',
             playerVars: {
                 autoplay: 0,
                 controls: 1,
+                origin: window.location.origin,
             },
         });
 
         player.on('ready', () => {
             console.log('Player is ready!');
         });
-
-        return () => {
-            player.destroy();
-        };
     }, []);
 
     return (
