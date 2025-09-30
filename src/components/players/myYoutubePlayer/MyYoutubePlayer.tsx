@@ -21,8 +21,8 @@ export function MyYoutubePlayer() {
 
     return (
         <div>
-            <h2 className="text-xl font-bold mb-2">My YouTube Player</h2>
-            <div ref={playerRef} style={{ width: '100%', height: '390px' }} />
+            <h2>My YouTube Player</h2>
+            <div ref={playerRef} style={{ width: '1000px', height: '1000px' }} />
         </div>
     );
 }
