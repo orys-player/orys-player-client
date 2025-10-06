@@ -1,47 +1,42 @@
-import { Box, Button, Divider, Drawer, IconButton, MenuItem, Toolbar } from '@mui/material';
+import { Box, Toolbar } from '@mui/material';
 import React from 'react';
 import { useSxs } from './_sxs';
+import { CustomButton } from '../customButton';
 
 export function MainToolbar() {
     const sxs = useSxs();
 
     return (
         <Toolbar sx={sxs.mainToolbar} variant="dense" disableGutters>
-            <Box sx={{ flexGrow: 1, display: 'flex', alignItems: 'center', px: 0 }}>
+            <Box sx={sxs.mainToolbarLeftSection}>
                 <Box sx={{ display: 'flex' }}>
-                    <Button variant="text" color="info" size="small">
+                    <CustomButton variant="text" color="primary" size="small">
                         Features
-                    </Button>
-                    <Button variant="text" color="info" size="small">
+                    </CustomButton>
+                    <CustomButton variant="text" color="primary" size="small">
                         Testimonials
-                    </Button>
-                    <Button variant="text" color="info" size="small">
+                    </CustomButton>
+                    <CustomButton variant="text" color="primary" size="small">
                         Highlights
-                    </Button>
-                    <Button variant="text" color="info" size="small">
+                    </CustomButton>
+                    <CustomButton variant="text" color="primary" size="small">
                         Pricing
-                    </Button>
-                    <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
+                    </CustomButton>
+                    <CustomButton variant="text" color="primary" size="small">
                         FAQ
-                    </Button>
-                    <Button variant="text" color="info" size="small" sx={{ minWidth: 0 }}>
+                    </CustomButton>
+                    <CustomButton variant="text" color="primary" size="small">
                         Blog
-                    </Button>
+                    </CustomButton>
                 </Box>
             </Box>
-            <Box
-                sx={{
-                    display: 'flex',
-                    gap: 1,
-                    alignItems: 'center',
-                }}
-            >
-                <Button color="primary" variant="text" size="small">
-                    Sign in
-                </Button>
-                <Button color="primary" variant="contained" size="small">
-                    Sign up
-                </Button>
+            <Box sx={sxs.mainToolbarRightSection}>
+                <CustomButton color="primary" variant="text" size="small">
+                    Se connecter
+                </CustomButton>
+                <CustomButton gradient color="secondary" variant="contained" size="small">
+                    S'inscrire
+                </CustomButton>
             </Box>
         </Toolbar>
     );

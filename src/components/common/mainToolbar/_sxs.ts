@@ -17,5 +17,16 @@ export function useSxs() {
             boxShadow: (theme.vars || theme).shadows[1],
             padding: '8px 12px',
         },
+        mainToolbarLeftSection: {
+            flexGrow: 1,
+            display: 'flex',
+            alignItems: 'center',
+            px: 0,
+        },
+        mainToolbarRightSection: {
+            display: 'flex',
+            gap: 1,
+            alignItems: 'center',
+        },
     };
 }
