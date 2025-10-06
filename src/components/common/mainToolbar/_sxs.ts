@@ -1,6 +1,8 @@
-import { theme } from 'src/utils';
+import { useTheme } from '@mui/material';
 
 export function useSxs() {
+    const theme = useTheme();
+
     return {
         mainToolbar: {
             display: 'flex',
