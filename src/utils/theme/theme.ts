@@ -1,15 +1,25 @@
 import { createTheme } from '@mui/material';
+import { palette } from './palette';
+import Moderniz from './fonts/Moderniz.otf';
+import TangoSans from './fonts/TangoSans.ttf';
 
 export const theme = createTheme({
-    palette: {
-        background: {
-            paper: '#FFFFFF',
-        },
-        text: {
-            primary: '#FFFFFF',
-            secondary: '#000000',
-        },
-        primary: { main: '#78F525' },
-        secondary: { main: '#811EE6' },
+    typography: {
+        fontFamily: ['TangoSans', 'Arial', 'sans-serif'].join(','),
     },
+    components: {
+        MuiCssBaseline: {
+            styleOverrides: `
+        @font-face {
+          font-family: 'Moderniz';
+          src: url(${Moderniz});
+        }
+        @font-face {
+          font-family: 'TangoSans';
+          src: url(${TangoSans});
+        }
+      `,
+        },
+    },
+    palette: palette,
 });
