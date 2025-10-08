@@ -1,3 +1,4 @@
+import { Stack, Typography } from '@mui/material';
 import React from 'react';
 import YoutubePlayer from 'youtube-player';
 
@@ -20,9 +21,9 @@ export function MyYoutubePlayer() {
     }, []);
 
     return (
-        <div>
-            <h2>My YouTube Player</h2>
+        <Stack>
+            <Typography>My YouTube Player</Typography>
             <div ref={playerRef} style={{ width: '1000px', height: '1000px' }} />
-        </div>
+        </Stack>
     );
 }
