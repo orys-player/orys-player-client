@@ -4,7 +4,7 @@ export function useSxs() {
             boxShadow: 0,
             bgcolor: 'transparent',
             backgroundImage: 'none',
-            mt: 'calc(var(--template-frame-height, 0px) + 28px)',
+            mt: '1rem',
         },
     };
 }

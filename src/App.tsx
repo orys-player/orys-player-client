@@ -2,7 +2,9 @@ import { ThemeProvider } from '@mui/system';
 
 import { MainMenu } from './components/common/mainMenu';
 import { MyYoutubePlayer } from './components/players';
-import { BackgroundView } from './components/views/backgroundView/BackgroundView';
+import { RightDrawer } from './components/common';
+import { BackgroundView } from './components/views';
+
 import { theme } from './utils';
 
 function App() {
@@ -11,6 +13,7 @@ function App() {
             <BackgroundView>
                 <MainMenu />
                 <MyYoutubePlayer />
+                <RightDrawer />
             </BackgroundView>
         </ThemeProvider>
     );
