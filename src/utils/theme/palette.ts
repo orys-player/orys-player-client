@@ -8,6 +8,6 @@ export const palette: Partial<PaletteOptions> = {
         primary: '#FFFFFF',
         secondary: '#000000',
     },
-    primary: { main: '#78F525' },
-    secondary: { main: '#811EE6' },
+    primary: { main: '#8efa46' },
+    secondary: { main: '#9938fc' },
 };
