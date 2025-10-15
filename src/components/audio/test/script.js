@@ -5,6 +5,9 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass';
 import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass';
 import { OutputPass } from 'three/examples/jsm/postprocessing/OutputPass';
 
+import vertexShader from '../../../shaders/vertex.glsl';
+import fragmentShader from '../../../shaders/fragment.glsl';
+
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(window.innerWidth, window.innerHeight);
 document.body.appendChild(renderer.domElement);
@@ -51,8 +54,8 @@ const uniforms = {
 
 const mat = new THREE.ShaderMaterial({
     uniforms,
-    vertexShader: document.getElementById('vertexshader').textContent,
-    fragmentShader: document.getElementById('fragmentshader').textContent,
+    vertexShader: vertexShader,
+    fragmentShader: fragmentShader,
 });
 
 const geo = new THREE.IcosahedronGeometry(4, 30);
