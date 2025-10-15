@@ -1,6 +1,6 @@
 import { Stack } from '@mui/material';
 import { useSxs } from './_sxs';
-import { MyYoutubePlayer } from '../../players';
+import { MyYoutubePlayer } from '../../video';
 
 export function RightDrawer() {
     const sxs = useSxs();
