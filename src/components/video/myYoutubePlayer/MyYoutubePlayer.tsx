@@ -3,7 +3,11 @@ import React from 'react';
 import { useSxs } from './_sxs';
 import ReactPlayer from 'react-player';
 
-export function MyYoutubePlayer() {
+interface MyYoutubePlayerProps {
+    onReady?: () => void;
+}
+
+export function MyYoutubePlayer({ onReady }: MyYoutubePlayerProps) {
     const sxs = useSxs();
 
     const [title, setTitle] = React.useState('');
@@ -36,7 +40,7 @@ export function MyYoutubePlayer() {
     return (
         <Stack>
             <Typography>{title}</Typography>
-            <ReactPlayer style={sxs.myYoutubePlayer} src={videoUrl} controls={true} />
+            <ReactPlayer style={sxs.myYoutubePlayer} src={videoUrl} controls={true} onReady={onReady} />
         </Stack>
     );
 }
