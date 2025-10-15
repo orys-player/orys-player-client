@@ -10,7 +10,7 @@ function App() {
     return (
         <ThemeProvider theme={theme}>
             <BackgroundView>
-                <RotatingCube />
+                {/* <RotatingCube /> */}
                 <MainMenu />
                 <RightDrawer />
             </BackgroundView>

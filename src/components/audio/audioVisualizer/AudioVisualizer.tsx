@@ -12,7 +12,7 @@ export function RotatingCube() {
 
         // Initialize camera
         const camera = new THREE.PerspectiveCamera(70, width / height, 0.01, 10);
-        camera.position.z = 1;
+        camera.position.z = 0.5;
 
         // Create scene
         const scene = new THREE.Scene();

@@ -7,11 +7,10 @@ export function MyYoutubePlayer() {
     const sxs = useSxs();
 
     const [title, setTitle] = React.useState('');
-    const videoUrl = 'https://www.youtube.com/watch?v=FmHGsLskU5k';
+    const videoUrl = 'https://www.youtube.com/watch?v=PKD8fapaXAw';
     const videoId = new URLSearchParams(new URL(videoUrl).search).get('v');
 
     const apiKey = import.meta.env.VITE_YOUTUBE_API_KEY;
-    console.log('API Key:', apiKey);
 
     React.useEffect(() => {
         async function fetchVideoTitle() {
