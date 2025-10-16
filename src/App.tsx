@@ -42,19 +42,15 @@ function App() {
     const [mediaElement, setMediaElement] = useState<HTMLMediaElement | null>(null);
 
     const handleReady = () => {
-        // Access the underlying <video> or <audio> element
-        const internal = playerRef.current?.getInternalPlayer() as HTMLMediaElement | undefined;
-        if (internal) {
-            setMediaElement(internal);
-            console.log('Media element connected to visualizer:', internal);
-        }
+        const internal = playerRef.current?.getInternalPlayer();
+        console.log('Internal player object:', internal);
     };
 
     return (
         <div>
             <PerlinBloomScene mediaElement={mediaElement} />
 
-            <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
+            <div>
                 <ReactPlayer
                     ref={playerRef}
                     src="https://www.youtube.com/watch?v=PKD8fapaXAw"

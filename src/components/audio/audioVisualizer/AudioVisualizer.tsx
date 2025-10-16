@@ -17,6 +17,11 @@ const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
     useEffect(() => {
         if (!mountRef.current) return;
 
+        // Clear any previous canvas if it somehow exists
+        if (mountRef.current?.firstChild) {
+            mountRef.current.innerHTML = '';
+        }
+
         // Renderer
         const renderer = new THREE.WebGLRenderer({ antialias: true });
         renderer.setSize(window.innerWidth, window.innerHeight);
@@ -53,8 +58,12 @@ const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
         const listener = new THREE.AudioListener();
         camera.add(listener);
         const audioContext = listener.context;
+        console.log('audioContext', audioContext);
 
         const analyser = new THREE.AudioAnalyser(new THREE.Audio(listener), 64);
+        console.log('analyser', analyser);
+
+        console.log('mediaElement', mediaElement);
 
         // Connect react-player's media element if available
         if (mediaElement) {
@@ -98,7 +107,7 @@ const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
         bloomFolder.add(params, 'strength', 0, 3).onChange(v => (bloomPass.strength = v));
         bloomFolder.add(params, 'radius', 0, 1).onChange(v => (bloomPass.radius = v));
 
-        // Mouse + Resize
+        // Mouse
         let mouseX = 0,
             mouseY = 0;
         const onMouseMove = (e: MouseEvent) => {
@@ -109,6 +118,7 @@ const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
         };
         document.addEventListener('mousemove', onMouseMove);
 
+        // Dynamic resize of the screen
         const onResize = () => {
             camera.aspect = window.innerWidth / window.innerHeight;
             camera.updateProjectionMatrix();
@@ -136,6 +146,7 @@ const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
             document.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('resize', onResize);
             gui.destroy();
+
             mountRef.current?.removeChild(renderer.domElement);
             renderer.dispose();
         };
