@@ -38,27 +38,10 @@ import ReactPlayer from 'react-player';
 import PerlinBloomScene from './components/audio/audioVisualizer/AudioVisualizer';
 
 function App() {
-    const playerRef = useRef<any>(null);
-    const [mediaElement, setMediaElement] = useState<HTMLMediaElement | null>(null);
-
-    const handleReady = () => {
-        const internal = playerRef.current?.getInternalPlayer();
-        console.log('Internal player object:', internal);
-    };
 
     return (
         <div>
-            <PerlinBloomScene mediaElement={mediaElement} />
-
-            <div>
-                <ReactPlayer
-                    ref={playerRef}
-                    src="src/assets/audioFiles/music.mp3"
-                    controls
-                    playing
-                    onReady={handleReady}
-                />
-            </div>
+            <PerlinBloomScene />
         </div>
     );
 }

@@ -7,11 +7,7 @@ import { UnrealBloomPass } from 'three-stdlib';
 import vertexShader from '../../../shaders/vertex.glsl';
 import fragmentShader from '../../../shaders/fragment.glsl';
 
-interface Props {
-    mediaElement?: HTMLMediaElement | null;
-}
-
-const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
+const PerlinBloomScene: React.FC = () => {
     const mountRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -57,26 +53,18 @@ const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
         // Audio setup
         const listener = new THREE.AudioListener();
         camera.add(listener);
-        const audioContext = listener.context;
-        console.log('audioContext', audioContext);
 
-        const analyser = new THREE.AudioAnalyser(new THREE.Audio(listener), 64);
-        console.log('analyser', analyser);
+        const sound = new THREE.Audio(listener);
 
-        console.log('mediaElement', mediaElement);
+        const audioLoader = new THREE.AudioLoader();
+        audioLoader.load('/src/assets/audioFiles/music.mp3', function (buffer) {
+            sound.setBuffer(buffer);
+            window.addEventListener('click', function () {
+                sound.play();
+            });
+        });
 
-        // Connect react-player's media element if available
-        if (mediaElement) {
-            try {
-                const source = audioContext.createMediaElementSource(mediaElement);
-                analyser.analyser.disconnect();
-                source.connect(analyser.analyser);
-                source.connect(audioContext.destination);
-                console.log('Visualizer connected to media element');
-            } catch (err) {
-                console.warn('Could not connect to react-player element:', err);
-            }
-        }
+        const analyser = new THREE.AudioAnalyser(sound, 64);
 
         // Post-processing
         const renderScene = new RenderPass(scene, camera);
@@ -150,7 +138,7 @@ const PerlinBloomScene: React.FC<Props> = ({ mediaElement }) => {
             mountRef.current?.removeChild(renderer.domElement);
             renderer.dispose();
         };
-    }, [mediaElement]);
+    }, []);
 
     return <div ref={mountRef} />;
 };
