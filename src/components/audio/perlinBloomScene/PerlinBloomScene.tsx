@@ -7,7 +7,7 @@ import { UnrealBloomPass } from 'three-stdlib';
 import vertexShader from '../../../shaders/vertex.glsl';
 import fragmentShader from '../../../shaders/fragment.glsl';
 
-const PerlinBloomScene: React.FC = () => {
+export function PerlinBloomScene() {
     const mountRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const PerlinBloomScene: React.FC = () => {
         // Scene + Camera
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, -2, 14);
+        camera.position.set(0, -2, 10);
         camera.lookAt(0, 0, 0);
 
         // Uniforms
@@ -59,6 +59,7 @@ const PerlinBloomScene: React.FC = () => {
         const audioLoader = new THREE.AudioLoader();
         audioLoader.load('/src/assets/audioFiles/music.mp3', function (buffer) {
             sound.setBuffer(buffer);
+            sound.setVolume(0.15);
             window.addEventListener('click', function () {
                 sound.play();
             });
@@ -141,6 +142,4 @@ const PerlinBloomScene: React.FC = () => {
     }, []);
 
     return <div ref={mountRef} />;
-};
-
-export default PerlinBloomScene;
+}

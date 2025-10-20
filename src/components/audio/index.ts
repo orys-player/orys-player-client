@@ -1,1 +1,1 @@
-export * from './audioVisualizer';
+export * from './perlinBloomScene';
