@@ -86,6 +86,8 @@ export function PerlinBloomScene() {
         };
 
         const gui = new GUI();
+        gui.domElement.id = 'perlin-bloom-gui';
+
         const colorsFolder = gui.addFolder('Colors');
         colorsFolder.add(params, 'red', 0, 1).onChange(v => (uniforms.u_red.value = v));
         colorsFolder.add(params, 'green', 0, 1).onChange(v => (uniforms.u_green.value = v));
