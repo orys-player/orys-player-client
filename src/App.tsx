@@ -53,7 +53,7 @@ function App() {
             <div>
                 <ReactPlayer
                     ref={playerRef}
-                    src="https://www.youtube.com/watch?v=PKD8fapaXAw"
+                    src="src/assets/audioFiles/music.mp3"
                     controls
                     playing
                     onReady={handleReady}
