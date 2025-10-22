@@ -35,7 +35,7 @@ export function PerlinBloomScene() {
         const uniforms = {
             u_time: { value: 0.0 },
             u_frequency: { value: 0.0 },
-            u_color: { value: new THREE.Color(0, 0, 0) },
+            u_color: { value: new THREE.Color(0x00ffff) },
         };
 
         // Material + Geometry
