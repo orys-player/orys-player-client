@@ -64,8 +64,6 @@ export function PerlinBloomScene() {
             });
         });
 
-        const analyser = new THREE.AudioAnalyser(sound, 64);
-
         // Post-processing
         const renderScene = new RenderPass(scene, camera);
         const bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 0.5, 0.8, 0.5);
@@ -118,6 +116,8 @@ export function PerlinBloomScene() {
         window.addEventListener('resize', onResize);
 
         // Animate
+        const analyser = new THREE.AudioAnalyser(sound, 64);
+
         const clock = new THREE.Clock();
         const animate = () => {
             requestAnimationFrame(animate);
