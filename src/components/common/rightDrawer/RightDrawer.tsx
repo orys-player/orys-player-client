@@ -12,6 +12,7 @@ export function RightDrawer({ onReady }: RightDrawerProps) {
     return (
         <Stack position="fixed" sx={sxs.rightDrawer}>
             <MyYoutubePlayer onReady={onReady} />
+            <Stack id="gui-slot" />
         </Stack>
     );
 }

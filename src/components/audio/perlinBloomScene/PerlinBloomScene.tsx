@@ -27,7 +27,7 @@ export function PerlinBloomScene() {
         // Scene + Camera
         const scene = new THREE.Scene();
         const camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 1000);
-        camera.position.set(0, -2, 10);
+        camera.position.set(0, -2, 8);
         camera.lookAt(0, 0, 0);
 
         // Uniforms
@@ -85,8 +85,7 @@ export function PerlinBloomScene() {
             radius: 0.8,
         };
 
-        const gui = new GUI();
-        gui.domElement.id = 'perlin-bloom-gui';
+        const gui = new GUI({ autoPlace: false });
 
         const colorsFolder = gui.addFolder('Colors');
         colorsFolder.add(params, 'red', 0, 1).onChange(v => (uniforms.u_red.value = v));
@@ -97,6 +96,9 @@ export function PerlinBloomScene() {
         bloomFolder.add(params, 'threshold', 0, 1).onChange(v => (bloomPass.threshold = v));
         bloomFolder.add(params, 'strength', 0, 3).onChange(v => (bloomPass.strength = v));
         bloomFolder.add(params, 'radius', 0, 1).onChange(v => (bloomPass.radius = v));
+
+        const guiSlot = document.getElementById('gui-slot');
+        guiSlot?.appendChild(gui.domElement);
 
         // Mouse
         let mouseX = 0,
@@ -136,7 +138,7 @@ export function PerlinBloomScene() {
         return () => {
             document.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('resize', onResize);
-            gui.destroy();
+            guiSlot?.removeChild(gui.domElement);
 
             mountRef.current?.removeChild(renderer.domElement);
             renderer.dispose();
