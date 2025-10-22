@@ -90,9 +90,9 @@ export function PerlinBloomScene() {
         });
 
         const bloomFolder = gui.addFolder('Bloom');
-        bloomFolder.add(params, 'threshold', 0, 1).onChange(v => (bloomPass.threshold = v));
-        bloomFolder.add(params, 'strength', 0, 3).onChange(v => (bloomPass.strength = v));
-        bloomFolder.add(params, 'radius', 0, 1).onChange(v => (bloomPass.radius = v));
+        bloomFolder.add(params, 'threshold', 0, 0.5).onChange(v => (bloomPass.threshold = v));
+        bloomFolder.add(params, 'strength', 0, 2).onChange(v => (bloomPass.strength = v));
+        bloomFolder.add(params, 'radius', 0, 2).onChange(v => (bloomPass.radius = v));
 
         const guiSlot = document.getElementById('gui-slot');
         guiSlot?.appendChild(gui.domElement);
