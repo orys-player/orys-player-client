@@ -35,9 +35,7 @@ export function PerlinBloomScene() {
         const uniforms = {
             u_time: { value: 0.0 },
             u_frequency: { value: 0.0 },
-            u_red: { value: 1.0 },
-            u_green: { value: 1.0 },
-            u_blue: { value: 1.0 },
+            u_color: { value: new THREE.Color(0, 0, 0) },
         };
 
         // Material + Geometry
@@ -78,9 +76,7 @@ export function PerlinBloomScene() {
 
         // GUI
         const params = {
-            red: 1.0,
-            green: 1.0,
-            blue: 1.0,
+            color: '#00FFFF',
             threshold: 0.5,
             strength: 0.5,
             radius: 0.8,
@@ -89,9 +85,9 @@ export function PerlinBloomScene() {
         const gui = new GUI({ autoPlace: false });
 
         const colorsFolder = gui.addFolder('Colors');
-        colorsFolder.add(params, 'red', 0, 1).onChange(v => (uniforms.u_red.value = v));
-        colorsFolder.add(params, 'green', 0, 1).onChange(v => (uniforms.u_green.value = v));
-        colorsFolder.add(params, 'blue', 0, 1).onChange(v => (uniforms.u_blue.value = v));
+        colorsFolder.addColor(params, 'color').onChange(v => {
+            uniforms.u_color.value.set(v);
+        });
 
         const bloomFolder = gui.addFolder('Bloom');
         bloomFolder.add(params, 'threshold', 0, 1).onChange(v => (bloomPass.threshold = v));
