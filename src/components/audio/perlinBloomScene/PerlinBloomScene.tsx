@@ -1,4 +1,3 @@
-import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 import { GUI } from 'dat.gui';
 import { EffectComposer } from 'three-stdlib';
@@ -6,11 +5,13 @@ import { RenderPass } from 'three-stdlib';
 import { UnrealBloomPass } from 'three-stdlib';
 import vertexShader from '../../../shaders/vertex.glsl';
 import fragmentShader from '../../../shaders/fragment.glsl';
+import React from 'react';
+import { Stack } from '@mui/material';
 
 export function PerlinBloomScene() {
-    const mountRef = useRef<HTMLDivElement>(null);
+    const mountRef = React.useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
+    React.useEffect(() => {
         if (!mountRef.current) return;
 
         // Clear any previous canvas if it somehow exists
@@ -145,5 +146,5 @@ export function PerlinBloomScene() {
         };
     }, []);
 
-    return <div ref={mountRef} />;
+    return <Stack ref={mountRef} />;
 }
