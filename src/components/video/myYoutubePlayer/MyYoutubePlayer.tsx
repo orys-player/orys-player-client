@@ -36,7 +36,12 @@ export function MyYoutubePlayer() {
     return (
         <Stack>
             <Typography>{title}</Typography>
-            <ReactPlayer style={sxs.myYoutubePlayer} src={videoUrl} controls={true} />
+            <ReactPlayer
+                id="audio-player"
+                style={sxs.myYoutubePlayer}
+                src="/src/assets/audioFiles/music.mp3"
+                controls={true}
+            />
         </Stack>
     );
 }
