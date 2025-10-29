@@ -1,9 +1,8 @@
 import { Stack, Typography } from '@mui/material';
 import React from 'react';
 import { useSxs } from './_sxs';
-import ReactPlayer from 'react-player';
 
-export function MyYoutubePlayer() {
+export function AudioPlayer() {
     const sxs = useSxs();
 
     const [title, setTitle] = React.useState('');
@@ -36,12 +35,7 @@ export function MyYoutubePlayer() {
     return (
         <Stack>
             <Typography>{title}</Typography>
-            <ReactPlayer
-                // id="audio-player"
-                style={sxs.myYoutubePlayer}
-                src="/src/assets/audioFiles/music.mp3"
-                controls={true}
-            />
+            <audio style={sxs.audioPlayer} id="audio-player" src="src/assets/audioFiles/music2.mp3" controls />
         </Stack>
     );
 }

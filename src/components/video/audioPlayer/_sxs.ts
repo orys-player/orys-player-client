@@ -1,8 +1,6 @@
-import { MyYoutubePlayer } from './MyYoutubePlayer';
-
 export function useSxs() {
     return {
-        myYoutubePlayer: {
+        audioPlayer: {
             width: '100%',
             height: '100%',
         },

@@ -1,1 +1,1 @@
-export * from './myYoutubePlayer';
+export * from './audioPlayer';
