@@ -10,6 +10,7 @@ import { Stack } from '@mui/material';
 
 export function PerlinBloomScene() {
     const mountRef = React.useRef<HTMLDivElement>(null);
+    const audioContextRef = React.useRef<AudioContext | null>(null);
 
     React.useEffect(() => {
         if (!mountRef.current) return;
@@ -50,19 +51,30 @@ export function PerlinBloomScene() {
         scene.add(mesh);
 
         // Audio setup
-        const listener = new THREE.AudioListener();
-        camera.add(listener);
+        if (!audioContextRef.current) {
+            audioContextRef.current = new window.AudioContext();
+        }
 
-        const sound = new THREE.Audio(listener);
+        const audioElement = document.getElementById('audio-player') as HTMLAudioElement;
 
-        const audioLoader = new THREE.AudioLoader();
-        audioLoader.load('/src/assets/audioFiles/music.mp3', function (buffer) {
-            sound.setBuffer(buffer);
-            sound.setVolume(0.15);
-            window.addEventListener('click', function () {
-                sound.play();
-            });
-        });
+        // Only create source if it doesn't exist (prevents "already connected" error)
+        let source;
+        let analyser;
+
+        try {
+            source = audioContextRef.current.createMediaElementSource(audioElement);
+            analyser = audioContextRef.current.createAnalyser();
+            source.connect(analyser);
+            analyser.connect(audioContextRef.current.destination);
+            analyser.fftSize = 1024;
+        } catch (error) {
+            // If source already exists, just create a new analyser
+            console.log('Audio source already connected, reusing context');
+            analyser = audioContextRef.current.createAnalyser();
+            // You'll need to store and reuse the source node
+        }
+
+        const dataArray = new Uint8Array(analyser.frequencyBinCount);
 
         // Post-processing
         const renderScene = new RenderPass(scene, camera);
@@ -116,8 +128,6 @@ export function PerlinBloomScene() {
         window.addEventListener('resize', onResize);
 
         // Animate
-        const analyser = new THREE.AudioAnalyser(sound, 64);
-
         const clock = new THREE.Clock();
         const animate = () => {
             requestAnimationFrame(animate);
@@ -125,8 +135,23 @@ export function PerlinBloomScene() {
             camera.position.y += (-mouseY - camera.position.y) * 0.5;
             camera.lookAt(scene.position);
 
+            // Get frequency data
+            analyser.getByteFrequencyData(dataArray);
+
+            // Focus on bass frequencies (lower bins)
+            // With fftSize = 1024, we have 512 bins
+            // Bass is roughly in the first 10-15% of bins (0-50Hz to ~200Hz range)
+            const bassRange = Math.floor(dataArray.length * 0.15);
+            let bassSum = 0;
+            for (let i = 0; i < bassRange; i++) {
+                bassSum += dataArray[i];
+            }
+            const bassAverage = bassSum / bassRange;
+
+            // You can also boost the bass impact by multiplying or using a curve
+            uniforms.u_frequency.value = bassAverage * 1.5; // Boost bass by 1.5x
+
             uniforms.u_time.value = clock.getElapsedTime();
-            uniforms.u_frequency.value = analyser.getAverageFrequency();
 
             composer.render();
         };
