@@ -7,8 +7,7 @@ export function RightDrawer() {
 
     return (
         <Stack position="fixed" sx={sxs.rightDrawer}>
-            {/* <MyYoutubePlayer /> */}
-            <audio id="audio-player" src="/src/assets/audioFiles/music.mp3" controls />
+            <MyYoutubePlayer />
             <Stack id="gui-slot" />
         </Stack>
     );
